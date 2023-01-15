@@ -6,6 +6,7 @@ import com.account.model.Customer;
 import com.account.model.Properties;
 import com.account.repository.LoanRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class LoanController {
     private static final Logger logger = LoggerFactory.getLogger(LoanController.class);
 
     @PostMapping("/myLoan")
+    @Timed(value = "getLoanDetail.time", description = "Time taken to return loan Details")
     public ArrayList<Loan> getLoanDetail(@RequestHeader("ChedjouBank-correlation-id") String correlationId,@RequestBody Customer customer){
 
         logger.debug("ChedjouBank-correlation-id : {}. ", correlationId);
