@@ -29,7 +29,11 @@ public class LoanController {
     public ArrayList<Loan> getLoanDetail(@RequestHeader("ChedjouBank-correlation-id") String correlationId,@RequestBody Customer customer){
 
         logger.debug("ChedjouBank-correlation-id : {}. ", correlationId);
+        logger.info("getLoanDetail method has started");
+
         ArrayList<Loan> loans = loanRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
+        logger.info("getLoanDetail method is ending");
+
         if(loans!=null){
             return loans;
         }else {
